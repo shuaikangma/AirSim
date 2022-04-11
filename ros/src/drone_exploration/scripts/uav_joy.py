@@ -7,7 +7,7 @@ from airsim_ros_pkgs.msg import VelCmd
 from airsim_ros_pkgs.srv import TakeoffRequest,Takeoff
 
 msg = """
-Control the RoboMaster TT (Tello Talent) through Gamepad
+Control the Drone through Gamepad
 ---------------------------
 Moving around:
 Hold LB button to enable manual control
@@ -60,7 +60,7 @@ class UAVJoyTeleop(object):
         self._linear_scale = rospy.get_param("~linear_scale", 2)
         self._angular_scale = rospy.get_param("~angular_scale", 1.5)
 
-        rospy.loginfo("RMTT Joy Teleop Initializing...Done")
+        rospy.loginfo("Joy Teleop Initializing...Done")
 
     def joy_callback(self, joy):
         print("joy.axes[self._axis_pitch]",joy.axes[self._axis_pitch])
