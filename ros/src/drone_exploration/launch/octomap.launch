@@ -3,7 +3,7 @@
   <node pkg = "tf2_ros" type = "static_transform_publisher" name = "dlonng_static_test_broadcaster" args = "0 0 0 0 0 0 world_ned map" />
   <node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
     <!-- resolution in meters per pixel -->
-    <param name = "resolution" value = "0.15" />
+    <param name = "resolution" value = "0.5" />
 
     <!-- name of the fixed frame, needs to be "/map" for SLAM -->
     <!-- 静态全局地图的 frame_id，但在增量式构建地图时，需要提供输入的点云帧和静态全局帧之间的 TF 变换 -->
@@ -31,11 +31,11 @@
     <param name = "colored_map" value = "false" />
 	
     <!-- 增加了半径滤波器 -->
-    <param name = "outrem_radius" type = "double" value = "2.0" />
+    <param name = "outrem_radius" type = "double" value = "3.0" />
     <param name = "outrem_neighbors" type = "int" value = "2" />
 
     <!-- when building map, set to false to speed up!!! -->
-    <param name = "latch" value = "false" /> 
+    <param name = "latch" value = "true" /> 
 
     <!-- topic from where pointcloud2 messages are subscribed -->
     <!-- 要订阅的点云主题名称 /pointcloud/output -->

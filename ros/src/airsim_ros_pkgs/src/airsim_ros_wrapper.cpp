@@ -1343,6 +1343,7 @@ void AirsimROSWrapper::lidar_timer_cb(const ros::TimerEvent& event)
                 for (auto& lidar_publisher : vehicle_name_ptr_pair.second->lidar_pubs) {
                     auto lidar_data = airsim_client_lidar_.getLidarData(lidar_publisher.sensor_name, vehicle_name_ptr_pair.first);
                     sensor_msgs::PointCloud2 lidar_msg = get_lidar_msg_from_airsim(lidar_data, vehicle_name_ptr_pair.first);
+                    lidar_msg.header.frame_id += "/" + lidar_publisher.sensor_name;
                     lidar_publisher.publisher.publish(lidar_msg);
                 }
             }
