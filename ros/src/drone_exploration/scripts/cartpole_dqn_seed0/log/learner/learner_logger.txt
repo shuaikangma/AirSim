@@ -1,0 +1,166 @@
+[2022-04-17 01:52:16,694][base_learner.py][line: 336][    INFO] [RANK0]: DI-engine DRL Policy
+DQN(
+  (encoder): FCEncoder(
+    (act): ReLU()
+    (init): Linear(in_features=4, out_features=128, bias=True)
+    (main): Sequential(
+      (0): Linear(in_features=128, out_features=128, bias=True)
+      (1): ReLU()
+      (2): Linear(in_features=128, out_features=64, bias=True)
+      (3): ReLU()
+    )
+  )
+  (head): DuelingHead(
+    (A): Sequential(
+      (0): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (1): Sequential(
+        (0): Linear(in_features=64, out_features=2, bias=True)
+      )
+    )
+    (V): Sequential(
+      (0): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (1): Sequential(
+        (0): Linear(in_features=64, out_features=1, bias=True)
+      )
+    )
+  )
+)
+[2022-04-17 01:52:18,269][base_learner.py][line: 336][    INFO] [RANK0]: learner save ckpt in ./cartpole_dqn_seed0/ckpt/ckpt_best.pth.tar
+[2022-04-17 01:52:18,291][base_learner.py][line: 336][    INFO] [RANK0]: === Training Iteration 0 Result ===
+[2022-04-17 01:52:18,293][learner_hook.py][line: 224][    INFO] 
++-------+------------+----------------+-------------+
+| Name  | cur_lr_avg | total_loss_avg | q_value_avg |
++-------+------------+----------------+-------------+
+| Value | 0.001000   | 1.137325       | 0.074567    |
++-------+------------+----------------+-------------+
+[2022-04-17 01:52:18,296][base_learner.py][line: 336][    INFO] [RANK0]: learner save ckpt in ./cartpole_dqn_seed0/ckpt/iteration_0.pth.tar
+[2022-04-17 01:52:18,408][base_learner.py][line: 336][    INFO] [RANK0]: learner save ckpt in ./cartpole_dqn_seed0/ckpt/ckpt_best.pth.tar
+[2022-04-17 01:52:18,570][base_learner.py][line: 336][    INFO] [RANK0]: === Training Iteration 100 Result ===
+[2022-04-17 01:52:18,572][learner_hook.py][line: 224][    INFO] 
++-------+------------+----------------+-------------+
+| Name  | cur_lr_avg | total_loss_avg | q_value_avg |
++-------+------------+----------------+-------------+
+| Value | 0.001000   | 0.098996       | 1.126528    |
++-------+------------+----------------+-------------+
+[2022-04-17 01:52:18,867][base_learner.py][line: 336][    INFO] [RANK0]: === Training Iteration 200 Result ===
+[2022-04-17 01:52:18,869][learner_hook.py][line: 224][    INFO] 
++-------+------------+----------------+-------------+
+| Name  | cur_lr_avg | total_loss_avg | q_value_avg |
++-------+------------+----------------+-------------+
+| Value | 0.001000   | 0.106756       | 1.935890    |
++-------+------------+----------------+-------------+
+[2022-04-17 01:52:19,166][base_learner.py][line: 336][    INFO] [RANK0]: learner save ckpt in ./cartpole_dqn_seed0/ckpt/ckpt_best.pth.tar
+[2022-04-17 01:52:19,186][base_learner.py][line: 336][    INFO] [RANK0]: === Training Iteration 300 Result ===
+[2022-04-17 01:52:19,188][learner_hook.py][line: 224][    INFO] 
++-------+------------+----------------+-------------+
+| Name  | cur_lr_avg | total_loss_avg | q_value_avg |
++-------+------------+----------------+-------------+
+| Value | 0.001000   | 0.150243       | 2.854782    |
++-------+------------+----------------+-------------+
+[2022-04-17 01:52:19,407][base_learner.py][line: 336][    INFO] [RANK0]: learner save ckpt in ./cartpole_dqn_seed0/ckpt/ckpt_best.pth.tar
+[2022-04-17 01:52:19,469][base_learner.py][line: 336][    INFO] [RANK0]: === Training Iteration 400 Result ===
+[2022-04-17 01:52:19,471][learner_hook.py][line: 224][    INFO] 
++-------+------------+----------------+-------------+
+| Name  | cur_lr_avg | total_loss_avg | q_value_avg |
++-------+------------+----------------+-------------+
+| Value | 0.001000   | 0.197567       | 3.653205    |
++-------+------------+----------------+-------------+
+[2022-04-17 01:52:19,605][base_learner.py][line: 336][    INFO] [RANK0]: learner save ckpt in ./cartpole_dqn_seed0/ckpt/ckpt_best.pth.tar
+[2022-04-17 01:52:19,833][base_learner.py][line: 336][    INFO] [RANK0]: === Training Iteration 500 Result ===
+[2022-04-17 01:52:19,835][learner_hook.py][line: 224][    INFO] 
++-------+------------+----------------+-------------+
+| Name  | cur_lr_avg | total_loss_avg | q_value_avg |
++-------+------------+----------------+-------------+
+| Value | 0.001000   | 0.237434       | 4.381900    |
++-------+------------+----------------+-------------+
+[2022-04-17 01:52:20,114][base_learner.py][line: 336][    INFO] [RANK0]: learner save ckpt in ./cartpole_dqn_seed0/ckpt/ckpt_best.pth.tar
+[2022-04-17 01:52:26,962][base_learner.py][line: 336][    INFO] [RANK0]: learner save ckpt in ./cartpole_dqn_seed0/ckpt/ckpt_best.pth.tar
+[2022-04-17 01:52:44,664][base_learner.py][line: 336][    INFO] [RANK0]: DI-engine DRL Policy
+DQN(
+  (encoder): FCEncoder(
+    (act): ReLU()
+    (init): Linear(in_features=4, out_features=128, bias=True)
+    (main): Sequential(
+      (0): Linear(in_features=128, out_features=128, bias=True)
+      (1): ReLU()
+      (2): Linear(in_features=128, out_features=64, bias=True)
+      (3): ReLU()
+    )
+  )
+  (head): DuelingHead(
+    (A): Sequential(
+      (0): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (1): Sequential(
+        (0): Linear(in_features=64, out_features=2, bias=True)
+      )
+    )
+    (V): Sequential(
+      (0): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (1): Sequential(
+        (0): Linear(in_features=64, out_features=1, bias=True)
+      )
+    )
+  )
+)
+[2022-04-17 01:52:46,245][base_learner.py][line: 336][    INFO] [RANK0]: learner save ckpt in ./cartpole_dqn_seed0/ckpt/ckpt_best.pth.tar
+[2022-04-17 01:52:46,277][base_learner.py][line: 336][    INFO] [RANK0]: === Training Iteration 0 Result ===
+[2022-04-17 01:52:46,279][learner_hook.py][line: 224][    INFO] 
++-------+------------+----------------+-------------+
+| Name  | cur_lr_avg | total_loss_avg | q_value_avg |
++-------+------------+----------------+-------------+
+| Value | 0.001000   | 1.137325       | 0.074567    |
++-------+------------+----------------+-------------+
+[2022-04-17 01:52:46,285][base_learner.py][line: 336][    INFO] [RANK0]: learner save ckpt in ./cartpole_dqn_seed0/ckpt/iteration_0.pth.tar
+[2022-04-17 01:52:46,523][base_learner.py][line: 336][    INFO] [RANK0]: learner save ckpt in ./cartpole_dqn_seed0/ckpt/ckpt_best.pth.tar
+[2022-04-17 01:52:46,725][base_learner.py][line: 336][    INFO] [RANK0]: === Training Iteration 100 Result ===
+[2022-04-17 01:52:46,726][learner_hook.py][line: 224][    INFO] 
++-------+------------+----------------+-------------+
+| Name  | cur_lr_avg | total_loss_avg | q_value_avg |
++-------+------------+----------------+-------------+
+| Value | 0.001000   | 0.098996       | 1.126528    |
++-------+------------+----------------+-------------+
+[2022-04-17 01:52:47,123][base_learner.py][line: 336][    INFO] [RANK0]: === Training Iteration 200 Result ===
+[2022-04-17 01:52:47,125][learner_hook.py][line: 224][    INFO] 
++-------+------------+----------------+-------------+
+| Name  | cur_lr_avg | total_loss_avg | q_value_avg |
++-------+------------+----------------+-------------+
+| Value | 0.001000   | 0.106756       | 1.935890    |
++-------+------------+----------------+-------------+
+[2022-04-17 01:52:47,451][base_learner.py][line: 336][    INFO] [RANK0]: learner save ckpt in ./cartpole_dqn_seed0/ckpt/ckpt_best.pth.tar
+[2022-04-17 01:52:47,470][base_learner.py][line: 336][    INFO] [RANK0]: === Training Iteration 300 Result ===
+[2022-04-17 01:52:47,471][learner_hook.py][line: 224][    INFO] 
++-------+------------+----------------+-------------+
+| Name  | cur_lr_avg | total_loss_avg | q_value_avg |
++-------+------------+----------------+-------------+
+| Value | 0.001000   | 0.150243       | 2.854782    |
++-------+------------+----------------+-------------+
+[2022-04-17 01:52:47,693][base_learner.py][line: 336][    INFO] [RANK0]: learner save ckpt in ./cartpole_dqn_seed0/ckpt/ckpt_best.pth.tar
+[2022-04-17 01:52:47,763][base_learner.py][line: 336][    INFO] [RANK0]: === Training Iteration 400 Result ===
+[2022-04-17 01:52:47,764][learner_hook.py][line: 224][    INFO] 
++-------+------------+----------------+-------------+
+| Name  | cur_lr_avg | total_loss_avg | q_value_avg |
++-------+------------+----------------+-------------+
+| Value | 0.001000   | 0.197567       | 3.653205    |
++-------+------------+----------------+-------------+
+[2022-04-17 01:52:47,848][base_learner.py][line: 336][    INFO] [RANK0]: learner save ckpt in ./cartpole_dqn_seed0/ckpt/ckpt_best.pth.tar
+[2022-04-17 01:52:48,055][base_learner.py][line: 336][    INFO] [RANK0]: === Training Iteration 500 Result ===
+[2022-04-17 01:52:48,056][learner_hook.py][line: 224][    INFO] 
++-------+------------+----------------+-------------+
+| Name  | cur_lr_avg | total_loss_avg | q_value_avg |
++-------+------------+----------------+-------------+
+| Value | 0.001000   | 0.237434       | 4.381900    |
++-------+------------+----------------+-------------+
+[2022-04-17 01:52:48,243][base_learner.py][line: 336][    INFO] [RANK0]: learner save ckpt in ./cartpole_dqn_seed0/ckpt/ckpt_best.pth.tar
+[2022-04-17 01:52:54,875][base_learner.py][line: 336][    INFO] [RANK0]: learner save ckpt in ./cartpole_dqn_seed0/ckpt/ckpt_best.pth.tar
