@@ -1,0 +1,17 @@
+env:
+  time_ratio: 1.0
+  fps: 20.0
+drone:
+  jerk_ratio: 1.0
+  acc_ratio: 1.0
+  vel_ratio: 1.0
+  position_ratio: 1.0
+  action_mode: acceleration #jerk acceleration 
+  camera_pram:
+    fx: 1.0
+    fy: 1.0
+    cx: 1.0
+    cy: 1.0
+map:
+  global_map_size: [50,40,20]
+  loacl_map_size: [10,10,20]

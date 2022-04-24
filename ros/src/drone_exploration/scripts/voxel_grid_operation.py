@@ -22,9 +22,11 @@ def read_show_voxel_grid(filename):
 def merge_octomap():
     pass
 
-filename = '~/groundtruth.binvox'
-resolution = 0.5
-bo_ = save_voxel_grid(filename,resolution)
-if bo_:
-    print('sucess')
-read_show_voxel_grid(filename)
+if __name__ == "__main__":
+    filename = '~/groundtruth.binvox'
+    resolution = 0.5
+    bo_ = save_voxel_grid(filename,resolution)
+    if bo_:
+        print('sucess')
+    read_show_voxel_grid(filename)
+    octomap.OcTree(0.1)
