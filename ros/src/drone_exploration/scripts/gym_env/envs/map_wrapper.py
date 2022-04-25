@@ -5,6 +5,7 @@ import pyglet
 import trimesh
 import trimesh.transformations as tf
 import trimesh.viewer
+import math
 
 import octomap
 
@@ -21,7 +22,19 @@ def pointcloud_from_depth(depth, fx, fy, cx, cy):
     pc = np.dstack((x, y, z))
 
     return pc
-
+    
+def quaternion_to_euler(quaternionr):
+    x = quaternionr.x_val
+    y = quaternionr.y_val
+    z = quaternionr.z_val
+    w = quaternionr.w_val
+    r = math.atan2(2 * (w * x + y * z), 1 - 2 * (x * x + y * y))
+    r = r / math.pi * 180
+    p = math.asin(2 * (w * y - z * x))
+    p = p / math.pi * 180
+    y = math.atan2(2 * (w * z + x * y), 1 - 2 * (y * y + z * z))
+    y = y / math.pi * 180
+    return r,p,y
 
 def labeled_scene_widget(scene, label):
     vbox = glooey.VBox()

@@ -5,6 +5,8 @@ import numpy as np
 import cv2
 import yaml
 import os
+import octomap
+import map_wrapper
 
 import gym
 import gym.logger as logger
@@ -30,9 +32,14 @@ class DroneExploreEnv(gym.Env):
         config = yaml.safe_load(yaml_config)
         self.time_ratio = config['env']['time_ratio']
         self.fps = config['env']['fps']
+        self.frame_time = 1000/self.fps #ms
         self.action_mode = config['drone']['action_mode']
+        self.vel_ratio = config['drone']['vel_linearly_ratio']
+        self.vel_yaw_ratio = config['drone']['vel_yaw_ratio']
         self.camera_pram = config['drone']['camera_pram']
+        self.global_map_size = config['map']['global_map_size']
         self.loacl_map_size = config['map']['loacl_map_size']
+        self.resolution = config['map']['resolution']
 
         # STEP 2 Init  MultirotorClient
         self._drone_client = airsim.MultirotorClient(ip = "127.0.0.1", port = self.client_port)
@@ -42,6 +49,10 @@ class DroneExploreEnv(gym.Env):
 
         # STEP 3 Init Map
         # local/global_last/global_last
+        self.octotree = octomap.OcTree(self.resolution)
+        self.global_map = np.ones(self.loacl_map_size,dtype=np.uint8)
+        self.last_global_map = np.ones(self.loacl_map_size,dtype=np.uint8)
+        self.local_map = np.ones(self.loacl_map_size,dtype=np.uint8)
         self._init_map()
 
         # STEP 4 Gym Var
@@ -58,22 +69,50 @@ class DroneExploreEnv(gym.Env):
         # step2 pointcloud_fprint(type(img2d))rocess every xxx ms
         # step5 occupied, empty = octree.extractPointCloud()
         # step6 add dron_position and convert to numpy/box
-        pass
-        self.last_global_map = self.global_map = None
-        self.local_map = None
-
-    def _update_map(self, depth_img):
-        pass
+        pass    
 
     def _get_collision_state(self):
-        pass
+        return self._drone_client.simGetCollisionInfo(vehicle_name = self.drone_name).has_collided
+
+    def _get_depth_img(self):
+        return self._drone_client.simGetImages([airsim.ImageRequest("front_center_custom", airsim.ImageType.DepthPlanar,
+                                                    True, False)],vehicle_name = self.drone_name)[0]    
+
+    def _update_map(self):
+        """update global octree use current frame of depth
+
+        Returns:
+            np.uint64: the time_stamp of the instert depth img
+        """
+        img_response = self._get_depth_img()
+        r,p,y = map_wrapper.quaternion_to_euler(img_response.camera_orientation)
+        frame_origin_np = np.array(img_response.camera_position.x_val,img_response.camera_position.y_val,
+                                    img_response.camera_position.z_val,r,p,y)
+        depth_img = airsim.list_to_2d_float_array(img_response.image_data_float, img_response.width, img_response.height)
+        pcd = map_wrapper.pointcloud_from_depth(depth_img, fx=self.camera_pram['fx'], 
+                                    fy=self.camera_pram['fy'], cx=self.camera_pram['cx'], cy=self.camera_pram['cy'])
+        nonnan = ~np.isnan(pcd).any(axis=2)   
+        self.octree.insertPointCloud(pointcloud=pcd[nonnan],sensor_origin=np.array([0, 0, 0],
+                                    frame_origin = frame_origin_np, dtype=float), maxrange=6)
+        return img_response.time_stamp
 
     def _rescure(self):
         pass
 
     def action_to_control(self, action_index):
-        pass
+        cur_action = self._action_set[action_index]
+        if self.action_mode == 'velocity':
+            cur_action = cur_action*self.vel_ratio
+            cur_action[3] = cur_action[3]/self.vel_ratio*self.vel_yaw_ratio
+            self._drone_client.moveByVelocityAsync(cur_action[0],cur_action[1],cur_action[2],self.frame_time,
+                                                    yaw_mode = airsim.YawMode(is_rate = True,yaw_or_rate = cur_action[3]))
     
+    def step_synchronous(self, action_ind: int):
+        pass
+
+    def step_asynchronous(self, action_ind: int):
+        pass
+
     def seed(self, seed: Optional[int] = None):
         pass
 
@@ -82,10 +121,7 @@ class DroneExploreEnv(gym.Env):
         # TODO Test how fast can get a img
         pass
         # #moveByAngleThrottleAsync
-        #self._drone_client.simGetImage(camera_name = "front_center_custom", image_type = airsim.ImageType.Scene, vehicle_name = self.drone_name)
-        responses = self._drone_client.simGetImages([airsim.ImageRequest("front_center_custom", airsim.ImageType.DepthPlanar,
-                                                    True, False)],vehicle_name = self.drone_name)
-        response = responses[0]
+        response = self._get_depth_img()
         # get numpy array
         img2d = airsim.list_to_2d_float_array(response.image_data_float, response.width, response.height) 
         print(type(img2d))
