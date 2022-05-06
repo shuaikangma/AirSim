@@ -13,6 +13,7 @@ drone:
     fy: 1.0
     cx: 1.0
     cy: 1.0
+  depth_max: 6.0
 map:
   global_map_size: [50,40,20]
   loacl_map_size: [10,10,20]

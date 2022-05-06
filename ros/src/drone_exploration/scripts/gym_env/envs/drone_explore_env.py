@@ -7,6 +7,7 @@ import yaml
 import os
 import octomap
 import map_wrapper
+import time
 
 import gym
 import gym.logger as logger
@@ -53,6 +54,7 @@ class DroneExploreEnv(gym.Env):
         self.global_map = np.ones(self.loacl_map_size,dtype=np.uint8)
         self.last_global_map = np.ones(self.loacl_map_size,dtype=np.uint8)
         self.local_map = np.ones(self.loacl_map_size,dtype=np.uint8)
+        self.last_time_stamp = np.uint64(0)
         self._init_map()
 
         # STEP 4 Gym Var
@@ -72,7 +74,7 @@ class DroneExploreEnv(gym.Env):
         pass    
 
     def _get_collision_state(self):
-        return self._drone_client.simGetCollisionInfo(vehicle_name = self.drone_name).has_collided
+        return self._drone_client.simGetCollisionInfo(vehicle_name = self.drone_name)
 
     def _get_depth_img(self):
         return self._drone_client.simGetImages([airsim.ImageRequest("front_center_custom", airsim.ImageType.DepthPlanar,
@@ -108,6 +110,9 @@ class DroneExploreEnv(gym.Env):
                                                     yaw_mode = airsim.YawMode(is_rate = True,yaw_or_rate = cur_action[3]))
     
     def step_synchronous(self, action_ind: int):
+        self.action_to_control(action_ind)
+        time.sleep(self.frame_time/1000)
+        self._update_map()
         pass
 
     def step_asynchronous(self, action_ind: int):
